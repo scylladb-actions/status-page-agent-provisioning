@@ -1,0 +1,18 @@
+name: Run provisioning test
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+jobs:
+  release:
+    name: Test Scylla Cloud provisioning
+    runs-on: ubuntu-latest
+    container: scylla0dkropachev/terraform:status-page-provision-1.0.1
+    steps:
+      - name: Run
+        run: cd /;/run.sh
+        env:
+          ATLASSIAN_STATUS_PAGE_KEY: ${{secrets.ATLASSIAN_STATUS_PAGE_KEY}}
+          ATLASSIAN_STATUS_PAGE_ID: ${{secrets.ATLASSIAN_STATUS_PAGE_ID}}
+          TF_VAR_api_endpoint: ${{secrets.TF_VAR_api_endpoint}}
+          TF_VAR_token: ${{secrets.TF_VAR_token}}
