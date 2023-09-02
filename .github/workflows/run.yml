@@ -7,10 +7,12 @@ jobs:
   release:
     name: Test Scylla Cloud provisioning
     runs-on: ubuntu-latest
-    container: scylla0dkropachev/terraform:status-page-provision-1.0.1
+    container: scylla0dkropachev/terraform:status-page-provision-1.0.3
     steps:
+      - name: Checkout Project
+        uses: actions/checkout@v1
       - name: Run
-        run: cd /;/run.sh
+        run: script/run.sh
         env:
           ATLASSIAN_STATUS_PAGE_KEY: ${{secrets.ATLASSIAN_STATUS_PAGE_KEY}}
           ATLASSIAN_STATUS_PAGE_ID: ${{secrets.ATLASSIAN_STATUS_PAGE_ID}}
