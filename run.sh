@@ -73,8 +73,9 @@ if (terraform init -no-color; terraform apply -no-color -auto-approve) 2>${tmpou
   fi
   echo "Resolve pending ticket"
   update_incident "${PENDING}" "resolved" "Issue disappeared, clusters successfully provisioned"
+  exit
 fi
-
+cat "${tmpoutputfile}"
 echo "Cluster failed to create"
 if [ -n "${PENDING}" ]; then
   echo "There is already ongoing ticket, update it"
